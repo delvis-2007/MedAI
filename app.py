@@ -7,7 +7,7 @@ app = Flask(__name__)
 # This looks for the key in Render's environment settings
 api_key = os.environ.get("GEMINI_API_KEY")
 genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-2.0-flash")
+model = genai.GenerativeModel("gemini-2.5-flash-lite")
 
 @app.route("/")
 def home():
