@@ -1,18 +1,18 @@
 from flask import Flask, request, jsonify, render_template
+import google.generativeai as genai
 
 app = Flask(__name__)
-import google.generativeai as genai
+
+# 🔑 Gemini setup
+genai.configure(api_key="YOUR_API_KEY_HERE")
+model = genai.GenerativeModel("gemini-1.5-flash")
+
+# 🏠 Home route
 @app.route("/")
 def home():
     return render_template("index.html")
-from flask import Flask, request, jsonify, render_template
-import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyB31b4KFNIkGVILELKfCEkgstCmCNFT-X4")
-
-model = genai.GenerativeModel("gemini-1.5-flash")
-
-app = Flask(__name__)
+# 🤖 AI route
 @app.route("/ask", methods=["POST"])
 def ask():
     data = request.get_json(silent=True) or {}
@@ -22,9 +22,11 @@ def ask():
         response = model.generate_content(question)
         answer = response.text
     except Exception as e:
-        answer = "AI error: " + str(e)
+        answer = str(e)
 
     return jsonify({"answer": answer})
 
+# 🚀 Run locally (Render ignores this)
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
+  
