@@ -1,13 +1,12 @@
+
 import os
 from flask import Flask, request, jsonify, render_template
-import google.generativeai as genai
+from google import genai
 
 app = Flask(__name__)
 
-# This looks for the key in Render's environment settings
-api_key = os.environ.get("GEMINI_API_KEY")
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-2.5-flash-lite")
+# Initialize the 2026 Free-Tier Client
+client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 @app.route("/")
 def home():
@@ -22,16 +21,19 @@ def ask():
         if not question:
             return jsonify({"answer": "Please ask a question!"})
 
-        response = model.generate_content(question)
+        # Using 2.5-flash-lite ensures it stays free and bypasses the "Limit: 0" error
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-lite", 
+            contents=question
+        )
+
         return jsonify({"answer": response.text})
 
     except Exception as e:
-        # If the key is missing or invalid, this will tell you
         return jsonify({"answer": f"System Error: {str(e)}"})
 
 if __name__ == "__main__":
-    # Required for Render deployment
+    # This port configuration is required for Render to work
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
-
   
