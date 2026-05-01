@@ -2,6 +2,119 @@
 <html>
 <head>
     <title>MedAI</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            background: #111827;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+        }
+
+        #chat {
+            height: 300px;
+            overflow-y: auto;
+            background: #1f2937;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .msg {
+            margin: 8px 0;
+        }
+
+        .user {
+            color: #60a5fa;
+        }
+
+        .bot {
+            color: #34d399;
+        }
+
+        input {
+            width: 70%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 25%;
+            padding: 10px;
+            background: #38bdf8;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0ea5e9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🧠 MedAI</h1>
+
+    <div id="chat"></div>
+
+    <input id="question" placeholder="Ask something...">
+    <button onclick="askAI()">Send</button>
+</div>
+
+<script>
+async function askAI() {
+    const input = document.getElementById("question");
+    const q = input.value;
+
+    if (!q) return;
+
+    const chat = document.getElementById("chat");
+
+    chat.innerHTML += `<div class="msg user">You: ${q}</div>`;
+
+    input.value = "";
+
+    const response = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ question: q })
+    });
+
+    const data = await response.json();
+
+    chat.innerHTML += `<div class="msg bot">MedAI: ${data.answer}</div>`;
+
+    chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <title>MedAI</title>
 </head>
 <body>
 
