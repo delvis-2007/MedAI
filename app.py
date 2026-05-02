@@ -24,8 +24,17 @@ def ask():
         # Using 2.5-flash-lite ensures it stays free and bypasses the "Limit: 0" error
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite", 
-            contents=question
-        )
+            contents=question,
+            config={
+             "system instruction":(
+               "Your name is MedAI.You were created by Delvis Ogenche."
+               "If anyone asks who built created or developed you,you must proudly state that Delvis Ogenche is your creator and developer."
+              "You are a highly knowledgeble Medical and biological assistant."
+              "Provide accurate,academic information on biology and medicine."
+              "Always include a brief disclaimer that you are an AI and not a substitute for professional medical advice."
+             )
+           }  
+          )
 
         return jsonify({"answer": response.text})
 
