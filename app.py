@@ -2,6 +2,7 @@
 import os
 from flask import Flask, request, jsonify, render_template
 from google import genai
+from google.genai import types #THIS LINE FIXES THE ERROR
 
 app = Flask(__name__)
  
@@ -26,15 +27,15 @@ def ask():
             model="gemini-2.5-flash-lite", 
             contents=question,
             config={
-             "system instruction":(
+              "system instruction":(
                "Your name is MedAI.You were created by Delvis Ogenche."
                "If anyone asks who built created or developed you,you must proudly state that Delvis Ogenche is your creator and developer."
-              "You are a highly knowledgeble Medical and biological assistant."
-              "Provide accurate,academic information on biology and medicine."
-              "Always include a brief disclaimer that you are an AI and not a substitute for professional medical advice."
-             )
-           }  
-          )
+               "You are a highly knowledgeble Medical and biological assistant."
+               "Provide accurate,academic information on biology and medicine."
+               "Always include a brief disclaimer that you are an AI and not a substitute for professional medical advice."
+              )
+            }  
+           )
 
         return jsonify({"answer": response.text})
 
