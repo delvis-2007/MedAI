@@ -110,17 +110,18 @@
 <body>
 
 <div class="container">
+</header>
     <h1>🧠 MedAI</h1>
+    <p class="subtitle">Advanced Biological and Medical Intelligence</p>
+</header>
+    
+<div class="quick-actions">
+    <button onclick="quickAsk('Explain Mitosis vs Meisos')">🔬 Cell Bio</button>
+    <button onclick="quickAsk('Summarize the Krebs Cycle')">Metabolism</button>
+    <button onclick="quickAsk('USMLE Step 1 High-Yield Tips')">🔬USMLE Prep</button>
+    <button onclick="clearChat()">🧹Clear</button>
+<    
 
-    <div id="chat">
-        <div class="msg bot"><b>MedAI:</b> Welcome! Ask me any medical question.</div>
-    </div>
-
-    <div class="input-area">
-        <input id="question" placeholder="Ask something..." onkeypress="if(event.key === 'Enter') askAI()">
-        <button onclick="askAI()">Send</button>
-    </div>
-</div>
 
 <script>
 async function askAI() {
