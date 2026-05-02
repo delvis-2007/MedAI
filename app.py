@@ -1,10 +1,10 @@
 
 import os
 from flask import Flask, request, jsonify, render_template
-p = Flask(__name__)
+from google import genai
 
-# from google import genai 
-
+app = Flask(__name__)
+ 
 #Initialize the 2026 Free-Tier Client
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
