@@ -5,7 +5,7 @@ p = Flask(__name__)
 
 # from google import genai 
 
-apInitialize the 2026 Free-Tier Client
+#Initialize the 2026 Free-Tier Client
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 @app.route("/")
