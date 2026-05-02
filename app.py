@@ -1,11 +1,11 @@
 
 import os
 from flask import Flask, request, jsonify, render_template
-from google import genai
+p = Flask(__name__)
 
-app = Flask(__name__)
+# from google import genai 
 
-# Initialize the 2026 Free-Tier Client
+apInitialize the 2026 Free-Tier Client
 client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
 @app.route("/")
