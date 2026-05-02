@@ -27,7 +27,7 @@ def ask():
             model="gemini-2.5-flash-lite", 
             contents=question,
             config=types.generateContentConfig(
-              system_instruction="Your name is MedAI.You were created by Delvis Ogenche.You are a medical and biology assistant
+              system_instruction="Your name is MedAI.You were created by Delvis Ogenche.You are a medical and biology assistant."
             )
           )
           
