@@ -26,7 +26,7 @@ def ask():
         response = client.models.generate_content(
             model="gemini-2.5-flash-lite", 
             contents=question,
-            config=types.generateContentConfig(
+            config=types.GenerateContentConfig(
               system_instruction="Your name is MedAI.You were created by Delvis Ogenche.You are a medical and biology assistant."
             )
           )
